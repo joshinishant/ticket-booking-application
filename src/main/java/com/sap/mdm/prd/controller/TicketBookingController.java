@@ -25,8 +25,13 @@ public class TicketBookingController {
 	
 	@Autowired
 	private TicketBookingService ticketBookingService;
-	
-	
+
+	@GetMapping(value="/checkApp",produces= {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
+	public String getTicket() {
+		return  "Ticket Booking Application is Running";
+	}
+
+
 	@GetMapping(value="/getTicket",produces= {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<TicketBookingEntity> getTicket(@RequestParam(value="ticketNumber") String ticketNumber) {
 		TicketBookingEntity ticket=ticketBookingService.findTicketByNumber(ticketNumber);
