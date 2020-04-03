@@ -1,3 +1,4 @@
+/*
 package com.sap.mdm.prd.Security;
 
 import org.springframework.context.annotation.Configuration;
@@ -16,8 +17,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
         auth.inMemoryAuthentication()
                 .withUser("Nishant").password("{noop}Password").roles("ADMIN")
-                /*.withUser("Leonardo").password("Password@123").roles("EMPLOYEE")
-                .withUser("Dante").password("Password@123").roles("USER")*/;
+                */
+/*.withUser("Leonardo").password("Password@123").roles("EMPLOYEE")
+                .withUser("Dante").password("Password@123").roles("USER")*//*
+;
     }
 
     @Override
@@ -25,3 +28,4 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable().authorizeRequests().anyRequest().authenticated().and().httpBasic();
     }
 }
+*/
