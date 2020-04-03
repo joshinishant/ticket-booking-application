@@ -16,10 +16,10 @@ public class TicketBookingApplicationTests {
     }
 
 
-	/*@Test
+	@Test
 	public void sampleFailureTest(){
-		Assert.assertTrue(false);
-	}*/
+		Assert.assertTrue(true);
+	}
 
 
 
