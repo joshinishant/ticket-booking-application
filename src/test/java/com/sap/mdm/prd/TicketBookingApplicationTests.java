@@ -15,4 +15,12 @@ public class TicketBookingApplicationTests {
 	    Assert.assertTrue(true);
     }
 
+
+	@Test
+	public void sampleFailureTest(){
+		Assert.assertTrue(false);
+	}
+
+
+
 }
