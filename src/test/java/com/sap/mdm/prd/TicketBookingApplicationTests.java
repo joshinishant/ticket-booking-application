@@ -18,7 +18,7 @@ public class TicketBookingApplicationTests {
 
 	@Test
 	public void sampleFailureTest(){
-		Assert.assertTrue(true);
+		Assert.assertFalse(false);
 	}
 
 
