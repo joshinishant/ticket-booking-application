@@ -1,0 +1,46 @@
+node {
+    stage('Checkout from Git') {
+	checkout scm
+        /*git branch: 'DockerSupport', url: 'https://github.com/joshinishant/ticket-booking-application.git'*/
+    }
+    
+    stage('Build Project') {
+        bat label: '', script: 'mvn clean package'
+    }
+   
+    stage('Archive and Generate test report') {
+        archiveArtifacts 'target/*.war'
+        
+        step([$class: 'JUnitResultArchiver', testResults: 'target\\surefire-reports\\TEST-*.xml'])
+        
+       publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: true, reportDir: '', reportFiles: 'index.html', reportName: 'Code Coverage', reportTitles: 'target\\site\\jacoco'])
+       
+       stash allowEmpty: true, excludes: 'target/**', includes: '**', name: 'ticket-app'    
+        
+    }
+}
+
+
+node('group1'){
+    stage('Verify Project') {
+        unstash 'ticket-app'
+        parallel ListFiles:{
+                bat 'dir'
+            },
+            MavenVerify:{
+                bat label: '', script: 'mvn verify'
+            },
+            failFast: true
+    } 
+}
+
+
+input message: 'Deploy to Local', ok: 'Approve', submitter: 'Nishant,nishant', submitterParameter: 'Approver'
+ node{
+       stage('Deployment'){
+           dir('target'){
+           /*    bat 'java -jar TicketBookingApplication-0.0.1-SNAPSHOT.war'*/
+           }
+       } 
+    }
+
